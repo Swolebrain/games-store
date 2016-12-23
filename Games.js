@@ -3,8 +3,8 @@ mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/games-store');
 
 const GameSchema = new mongoose.Schema({
-  name: String,
-  genre: String,
+  name: {type: String, required: true},
+  genre: {type: String, required: true},
   year: String,
   imageUrls: [String],
   description: String,
@@ -60,5 +60,6 @@ module.exports = {
   getAll: getAllGames,
   newGame: createNewGame,
   updateGame: updateGame,
-  delete: deleteGame
+  delete: deleteGame,
+  Game: Game
 };
