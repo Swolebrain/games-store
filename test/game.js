@@ -5,7 +5,7 @@ let Game = require('../Games.js').Game;
 
 let chai = require('chai');
 let chaiHttp = require('chai-http');
-let server = require('../server');
+let server = require('../index');
 let expect = chai.should();
 
 chai.use(chaiHttp);
@@ -31,19 +31,19 @@ describe('Tests for Games API', function(){
   });
 
   describe('/POST route for games', function(){
-    let validGame = {
-      name: "Another generic FPS",
-      genre: "fps",
-      year: "2016",
-      imageUrls: ["x", "y", "z"],
-      description: "This game is about killing some aliens.",
-      minimumRequirements: {cpu: "i5"},
-      recommendedRequirements: {cpu: "i5"},
-      price: "49.99",
-    };
     it("should post a game", function(done){
+      let validGame = {
+        name: "Another generic FPS",
+        genre: "fps",
+        year: "2016",
+        imageUrls: ["x", "y", "z"],
+        description: "This game is about killing some aliens.",
+        minimumRequirements: {cpu: "i5"},
+        recommendedRequirements: {cpu: "i5"},
+        price: "49.99",
+      };
       chai.request(server)
-      .post('games')
+      .post('/games')
       .send(validGame)
       .end(function(err, res){
         res.should.have.status(200);
@@ -54,11 +54,11 @@ describe('Tests for Games API', function(){
         res.body.should.have.property("description");
         res.body.description.should.be.eql("This game is about killing some aliens.")
         res.body.should.have.property("minimumRequirements");
-        res.body.minimumRequirements.should.be.a.("object");
+        res.body.minimumRequirements.should.be.a("object");
         res.body.minimumRequirements.should.have.property("cpu");
         res.body.minimumRequirements.cpu.should.be.eql("i5");
         res.body.should.have.property("recommendedRequirements");
-        res.body.recommendedRequirements.should.be.a.("object");
+        res.body.recommendedRequirements.should.be.a("object");
         res.body.recommendedRequirements.should.have.property("cpu");
         res.body.recommendedRequirements.cpu.should.be.eql("i5");
         res.body.should.have.property("price");
@@ -66,15 +66,15 @@ describe('Tests for Games API', function(){
         done();
       });
     });
-    it("should fail to post a game if req.body is empty", function(done){
-
-    });
-    it("should fail to post a game if name is missing", function(done){
-
-    });
-    it("should fail to post a game if description is missing", function(done){
-
-    });
+    // it("should fail to post a game if req.body is empty", function(done){
+    //
+    // });
+    // it("should fail to post a game if name is missing", function(done){
+    //
+    // });
+    // it("should fail to post a game if description is missing", function(done){
+    //
+    // });
   });
 
 

@@ -9,7 +9,7 @@ const GameSchema = new mongoose.Schema({
   imageUrls: [String],
   description: String,
   minimumRequirements: {},
-  recommendedRequiremens: {},
+  recommendedRequirements: {},
   price: String,
   hdspace: String,
 });
